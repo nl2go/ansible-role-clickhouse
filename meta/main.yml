@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: nl2go
+  role_name: clickhouse
+  description: An Ansible Role that manages installation and configuration of Yandex Clickhouse
+  company: SendinBlue GmbH
+  issue_tracker_url: https://github.com/nl2go/ansible-role-clickhouse/issues
+  license: MIT
+  min_ansible_version: 2.7
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - clickhouse
+dependencies: []

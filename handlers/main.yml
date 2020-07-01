@@ -1,0 +1,14 @@
+---
+- name: Enable ClickHouse
+  systemd:
+    name: clickhouse-server
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  listen: Update ClickHouse
+
+- name: Restart ClickHouse
+  systemd:
+    name: clickhouse-server
+    state: restarted
+  listen: Update ClickHouse

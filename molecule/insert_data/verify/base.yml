@@ -1,0 +1,9 @@
+---
+- command: clickhouse-client --query "SELECT * FROM molecule_tests.insert_data;"
+  register: query_result
+
+- name: Verify the result
+  assert:
+    that:
+      - query_result.rc == 0
+      - query_result.stdout|length > 0

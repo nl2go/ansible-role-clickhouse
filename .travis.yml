@@ -1,0 +1,29 @@
+---
+language: python
+services: docker
+
+env:
+  global:
+    - MOLECULE_PROJECT_DIR: "$TRAVIS_BUILD_DIR"
+    - MOLECULE_ROLE_NAME: "$(basename $TRAVIS_BUILD_DIR)"
+    - HCLOUD_TOKEN: "$HCLOUD_TOKEN"
+    - MOLECULE_TEST_SCOPE: "$TRAVIS_JOB_ID"
+  matrix:
+    - MOLECULE_PLATFORM: debian-9
+    - MOLECULE_PLATFORM: debian-10
+    - MOLECULE_PLATFORM: ubuntu-16.04
+    - MOLECULE_PLATFORM: ubuntu-18.04
+
+before_script:
+  - wget https://raw.githubusercontent.com/nl2go/docker-molecule/3.0.4-n2g-1.0.0/docker-compose.yml
+  - docker-compose up -d
+
+script:
+  - docker-compose exec -e HCLOUD_TOKEN="$HCLOUD_TOKEN" -e MOLECULE_TEST_SCOPE="$MOLECULE_TEST_SCOPE" -e MOLECULE_PLATFORM="$MOLECULE_PLATFORM" molecule molecule test --all
+
+after_script:
+  - docker-compose down
+  - codecov
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

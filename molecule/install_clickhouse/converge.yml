@@ -1,0 +1,12 @@
+---
+- name: Configure hosts
+  hosts: all
+  become: yes
+  vars:
+    clickhouse_conf_dir: "/etc/clickhouse-server"
+    clickhouse_logs_conf: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"
+    clickhouse_loglevel: "information"
+  tasks:
+    - include_role:
+        name: ansible-role-clickhouse
+        tasks_from: install

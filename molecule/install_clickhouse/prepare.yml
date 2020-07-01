@@ -1,0 +1,3 @@
+---
+- name: Prepare to test install_clickhouse (nothing to do)
+  hosts: all

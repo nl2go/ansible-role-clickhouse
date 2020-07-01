@@ -1,0 +1,5 @@
+---
+  - import_tasks: install.yml
+    tags: [clickhouse, clickhouse_install, install]
+  - import_tasks: config.yml
+    tags: [clickhouse, clickhouse_config, config]

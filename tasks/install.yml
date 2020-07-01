@@ -1,0 +1,18 @@
+---
+- name: Add the APT Key for ClickHouse.
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: E0C56BD4
+    state: present
+
+- name: Add ClickHouse APT sources
+  apt_repository:
+    repo: deb https://repo.clickhouse.tech/deb/stable/ main/
+    state: present
+
+- name: Install ClickHouse
+  apt:
+    pkg:
+      - clickhouse-server
+      - clickhouse-client
+  notify: Enable ClickHouse

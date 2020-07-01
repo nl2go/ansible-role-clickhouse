@@ -1,0 +1,10 @@
+---
+- name: Check if the logging configuration is in place
+  stat:
+    path: "{{ clickhouse_logs_conf }}"
+  register: stat_result
+
+- name: Verify the result
+  assert:
+    that:
+      - "stat_result.stat.exists"

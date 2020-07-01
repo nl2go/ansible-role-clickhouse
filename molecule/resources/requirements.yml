@@ -1,0 +1,4 @@
+---
+- src: nl2go.openjdk
+  version: 1.0.0
+## FIXME how to remove this? do we need it? No, CH is no java.

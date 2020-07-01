@@ -1,0 +1,7 @@
+---
+- name: Define CH log level
+  template:
+    src: log-level.xml.j2
+    dest: "{{ clickhouse_logs_conf }}"
+    mode: '0444'
+  notify: Restart ClickHouse

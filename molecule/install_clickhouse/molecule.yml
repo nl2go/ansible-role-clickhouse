@@ -1,0 +1,30 @@
+---
+driver:
+  name: hetznercloud
+lint: |
+  set -e
+  yamllint .
+platforms:
+  - name: ${MOLECULE_TEST_SCOPE:-default}-instance1
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+  inventory:
+    group_vars:
+      all:
+  lint: |
+    set -e
+    ansible-lint
+  playbooks:
+    create: ../resources/playbooks/create.yml
+    destroy: ../resources/playbooks/destroy.yml
+    verify: verify/main.yml
+verifier:
+  name: ansible
+  lint: |
+    set -e
+    ansible-lint
