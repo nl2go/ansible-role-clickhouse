@@ -1,0 +1,100 @@
+---
+driver:
+  name: hetznercloud
+lint: |
+  set -e
+  yamllint .
+platforms:
+  - name: ${MOLECULE_TEST_SCOPE:-default}-ch-1
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - clickhouse
+  - name: ${MOLECULE_TEST_SCOPE:-default}-zk-1
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - zookeeper
+  - name: ${MOLECULE_TEST_SCOPE:-default}-zk-2
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - zookeeper
+  - name: ${MOLECULE_TEST_SCOPE:-default}-zk-3
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - zookeeper
+  - name: ${MOLECULE_TEST_SCOPE:-default}-kfk-1
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - kafka
+  - name: ${MOLECULE_TEST_SCOPE:-default}-kfk-2
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - kafka
+  - name: ${MOLECULE_TEST_SCOPE:-default}-kfk-3
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - kafka
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+  inventory:
+    group_vars:
+      all:
+        kafka_test_client_sasl_conf: /tmp/jaas.client.cfg
+        kafka_test_client_conf: /tmp/client.properties
+        kafka_conf_dir: /etc/kafka
+        kafka_client_users:
+          - username: guest
+            password: guest
+        kafka_host: "{{ ansible_default_ipv4.address }}"
+        kafka_zookeeper_connection_hosts: "{{ groups['zookeeper'] | map('extract', hostvars, 'ansible_host') | map('regex_replace', '^(.*)', '\\1:2181') | list }}"
+        kafka_version: 2.5.0
+        zookeeper_members: "{{ groups['zookeeper'] | map('extract', hostvars, 'ansible_default_ipv4') | map(attribute='address') | list }}"
+        ch_kafka_topic: "molecule_tests_insert_data_via_kafka"
+        clickhouse_kafka_connection_hosts: "{{ groups['kafka'] | map('extract', hostvars, 'ansible_host') | map('regex_replace', '^(.*)', '\\1:9092') | list }}"
+        clickhouse_kafka_connection_hosts_str: "{{ clickhouse_kafka_connection_hosts|join(',') }}"
+      kafka:
+        kafka_jmx_host: localhost
+        kafka_jmx_username: jmx
+        kafka_jmx_password: molecule
+        kafka_jmx_enabled: true
+      clickhouse:
+        clickhouse_conf_dir: "/etc/clickhouse-server"
+        clickhouse_loglevel: "information"
+    host_vars:
+      "${MOLECULE_TEST_SCOPE:-default}-kfk-1":
+        kafka_broker_id: 1
+      "${MOLECULE_TEST_SCOPE:-default}-kfk-2":
+        kafka_broker_id: 2
+      "${MOLECULE_TEST_SCOPE:-default}-kfk-3":
+        kafka_broker_id: 3
+      "${MOLECULE_TEST_SCOPE:-default}-zk-1":
+        zookeeper_member_id: 1
+      "${MOLECULE_TEST_SCOPE:-default}-zk-2":
+        zookeeper_member_id: 2
+      "${MOLECULE_TEST_SCOPE:-default}-zk-3":
+        zookeeper_member_id: 3
+  lint: |
+    set -e
+    ansible-lint
+  playbooks:
+    create: ../resources/playbooks/create.yml
+    destroy: ../resources/playbooks/destroy.yml
+    verify: verify/main.yml
+verifier:
+  name: ansible
+  lint: |
+    set -e
+    ansible-lint
+dependency:
+  name: galaxy
+  options:
+    role-file: molecule/resources/requirements.yml

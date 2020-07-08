@@ -1,0 +1,12 @@
+---
+- name: Verify ClickHouse state
+  hosts: default-ch-1
+  tasks:
+    - name: Query Clickhouse for data about cities
+      command: clickhouse-client --query "SELECT * FROM molecule_tests.cities;"
+      register: query_result
+    - name: Verify the query returned no error and some data
+      assert:
+        that:
+          - query_result.rc == 0
+          - query_result.stdout|length > 0

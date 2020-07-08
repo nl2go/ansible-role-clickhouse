@@ -4,6 +4,7 @@
   register: service_status
   changed_when: no
   ignore_errors: yes
+  warn: false
 
 - name: Verify ClickHouse is running
   assert:
