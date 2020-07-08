@@ -20,6 +20,34 @@ Server configuration directory.
 
 Server log level.
 
+    clickhouse_profiles: 
+      default:
+        max_memory_usage: 10000000000
+        use_uncompressed_cache: 0
+        load_balancing: "random"
+
+A settings profile is a collection of [settings](https://clickhouse.tech/docs/en/operations/settings/settings-profiles/) grouped under the same name.
+
+    clickhouse_profiles: 
+      default:
+        password: "qwerty" # or `password_sha256_hex` to assign a password using its SHA256 hash
+        profile: "default"
+        quota: "default"
+
+The `users` section of the `user.xml` configuration file contains user  [settings](https://clickhouse.tech/docs/en/operations/settings/settings-users/).
+
+    clickhouse_profiles: 
+      default:
+        intervals:
+          - duration: 3600
+            queries: 0
+            errors: 0
+            result_rows: 0
+            read_rows: 0
+            execution_time: 0
+
+Quota [settings](https://clickhouse.tech/docs/en/operations/settings/settings-profiles/) is for limiting resource usage over a period of time or track the use of resources.
+
 ## Dependencies
 
 None.
