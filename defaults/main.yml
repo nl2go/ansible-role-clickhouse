@@ -37,7 +37,6 @@ clickhouse_users: # More settings: https://clickhouse.tech/docs/en/operations/se
     password: ""
     profile: "default"
     quota: "default"
-    comment: "Default user for login if user not defined"
 
 clickhouse_quotas: # More settings: https://clickhouse.tech/docs/en/operations/quotas/
   default:
