@@ -14,9 +14,6 @@
       - "'<quotas>' in user_config_result.stdout"
       - "'</quotas>' in user_config_result.stdout"
 
-- debug:
-    var: user_config_result.stdout
-
 - name: Verify default profile, user and quota
   assert:
     that:
