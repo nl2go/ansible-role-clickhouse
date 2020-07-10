@@ -1,0 +1,24 @@
+---
+- name: Get Users Configuration
+  shell: "cat {{ clickhouse_conf_dir }}/users.xml"
+  register: user_config_result
+  changed_when: no
+
+- name: Verify profiles, users, quotas
+  assert:
+    that:
+      - "'<profiles>' in user_config_result.stdout"
+      - "'</profiles>' in user_config_result.stdout"
+      - "'<users>' in user_config_result.stdout"
+      - "'</users>' in user_config_result.stdout"
+      - "'<quotas>' in user_config_result.stdout"
+      - "'</quotas>' in user_config_result.stdout"
+
+- debug:
+    var: user_config_result.stdout
+
+- name: Verify default profile, user and quota
+  assert:
+    that:
+      - user_config_result.stdout.count('<default>') == 3
+      - user_config_result.stdout.count('</default>') == 3
