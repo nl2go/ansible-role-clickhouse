@@ -5,6 +5,7 @@ clickhouse_loglevel: "information"  # More options: https://github.com/pocoproje
 
 ## Basic ClickHouse configuration settings
 ## See more information about every setting in the config template
+clickhouse_listen_host: 127.0.0.1
 clickhouse_http_port: 8123
 clickhouse_tcp_port: 9000
 clickhouse_mysql_port: 9004
