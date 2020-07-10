@@ -25,13 +25,15 @@
             {% elif user_settings.password_sha256_hex is defined %}
             <password_sha256_hex>{{ user_settings.password_sha256_hex }}</password_sha256_hex>
             {% endif %}
+            {% if user_settings.networks is defined %}
             <networks incl="networks" replace="replace">
             {% for net in user_settings.networks %}
             <ip>{{ net }}</ip>
             {% endfor %}
             </networks>
-            <profile>{{ user_settings.profile }}</profile>
-            <quota>{{ user_settings.quota }}</quota>
+            {% endif %}
+            <profile>{{ user_settings.profile if user_settings.profile is defined else 'default' }}</profile>
+            <quota>{{ user_settings.quota if user_settings.quota is defined else 'default' }}</quota>
             {% if user_settings.dbs is defined %}
             <allow_databases>
             {% for db in user_settings.dbs %}
@@ -49,7 +51,7 @@
         {% if quota_settings.comment is defined %}
         <!-- {{ quota_settings.comment }} -->
         {% endif %}
-        </{{ quota_name }}>
+        <{{ quota_name }}>
             {% for interval in quota_settings.intervals %}
             <interval>
                 {% if interval.duration is defined %}
