@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!-- {{ ansible_managed }} -->
+<yandex>
+   <profiles>
+    <!-- Profiles of settings. -->
+    {% for profile_name, profile_settings in clickhouse_profiles.items() %}
+        <{{ profile_name }}>
+            {% for setting_name, setting_value in profile_settings.items() %}
+            <{{ setting_name }}>{{ setting_value }}</{{ setting_name }}>
+            {% endfor %}
+        </{{ profile_name }}>
+    {% endfor %}
+    <!-- Custom profiles end -->
+    </profiles>
+
+    <!-- Users and ACL. -->
+    <users>
+        {% for user_name, user_settings in clickhouse_users.items() %}
+        {% if user_settings.comment is defined %}
+        <!-- {{ user_settings.comment }} -->
+        {% endif %}
+        <{{ user_name }}>
+            {% if user_settings.password is defined and user_settings.password_sha256_hex is not defined %}
+            <password>{{ user_settings.password }}</password>
+            {% elif user_settings.password_sha256_hex is defined %}
+            <password_sha256_hex>{{ user_settings.password_sha256_hex }}</password_sha256_hex>
+            {% endif %}
+            {% if user_settings.networks is defined %}
+            <networks incl="networks" replace="replace">
+            {% for net in user_settings.networks %}
+            <ip>{{ net }}</ip>
+            {% endfor %}
+            </networks>
+            {% endif %}
+            <profile>{{ user_settings.profile if user_settings.profile is defined else 'default' }}</profile>
+            <quota>{{ user_settings.quota if user_settings.quota is defined else 'default' }}</quota>
+            {% if user_settings.dbs is defined %}
+            <allow_databases>
+            {% for db in user_settings.dbs %}
+                <database>{{ db }}</database>
+            {% endfor %}
+            </allow_databases>
+            {% endif %}
+        </{{ user_name }}>
+        {% endfor %}
+    </users>
+
+    <!-- Quotas. -->
+    <quotas>
+        {% for quota_name, quota_settings in clickhouse_quotas.items() %}
+        {% if quota_settings.comment is defined %}
+        <!-- {{ quota_settings.comment }} -->
+        {% endif %}
+        <{{ quota_name }}>
+            {% for interval in quota_settings.intervals %}
+            <interval>
+                {% if interval.duration is defined %}
+                <duration>{{ interval.duration }}</duration>
+                {% endif %}
+                {% if interval.queries is defined %}
+                <queries>{{ interval.queries }}</queries>
+                {% endif %}
+                {% if interval.errors is defined %}
+                <errors>{{ interval.errors }}</errors>
+                {% endif %}
+                {% if interval.result_rows is defined %}
+                <result_rows>{{ interval.result_rows }}</result_rows>
+                {% endif %}
+                {% if interval.read_rows is defined %}
+                <read_rows>{{ interval.read_rows }}</read_rows>
+                {% endif %}
+                {% if interval.execution_time is defined %}
+                <execution_time>{{ interval.execution_time }}</execution_time>
+                {% endif %}
+            </interval>
+            {% endfor %}
+        </{{ quota_name }}>
+        {% endfor %}
+    </quotas>
+</yandex>

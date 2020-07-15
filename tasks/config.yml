@@ -6,6 +6,7 @@
     owner: root
     group: root
     mode: '0664'
+  notify: Restart ClickHouse
 
 - name: Define CH log level
   template:
@@ -19,4 +20,11 @@
     src: kafka.xml.j2
     dest: "{{ clickhouse_conf_dir }}/config.d/kafka.xml"
     mode: '0444'
+  notify: Restart ClickHouse
+
+- name: Config | Generate users config
+  template:
+    src: users.xml.j2
+    dest: "{{ clickhouse_conf_dir }}/users.xml"
+    mode: '0644'
   notify: Restart ClickHouse
