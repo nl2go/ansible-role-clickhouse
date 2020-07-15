@@ -1,0 +1,20 @@
+---
+- name: Prepare the test environment by installing OpenJDK
+  hosts: zookeeper, kafka
+  roles:
+    - nl2go.openjdk
+
+- name: Prepare the test environment by installing and configuring zookeeper
+  hosts: zookeeper
+  roles:
+    - nl2go.zookeeper
+
+- name: Prepare the test environment by installing and configuring Kafka client.
+  hosts: kafka
+  tasks:
+    - import_tasks: prepare_kafka.yml
+
+- name: Install Clickhouse and create the database
+  hosts: clickhouse
+  tasks:
+    - import_tasks: prepare_clickhouse.yml

@@ -1,0 +1,43 @@
+---
+- name: Prepare the test environment by installing and configuring clickhouse, server and client.
+  import_role:
+      name: ansible-role-clickhouse
+
+- name: Make sure CH is running
+  meta: flush_handlers
+
+- name: Remove previous database
+  command: clickhouse-client --query "DROP DATABASE IF EXISTS molecule_tests"
+  changed_when: no
+
+- name: Create database in Clickhouse
+  command: clickhouse-client --query "CREATE DATABASE molecule_tests"
+  changed_when: no
+
+- name: Create Kafka consumer in ClickHouse
+  changed_when: no
+  command: >
+    clickhouse-client --query
+    "CREATE TABLE IF NOT EXISTS molecule_tests.consumer(id UInt32, City String)
+    ENGINE = Kafka
+    SETTINGS kafka_broker_list = '{{ clickhouse_kafka_connection_hosts_str }}',
+    kafka_topic_list = '{{ ch_kafka_topic }}',
+    kafka_group_name = 'consumer_group1',
+    kafka_format = 'CSV',
+    kafka_skip_broken_messages = 1,
+    kafka_row_delimiter = '\n';"
+
+- name: Create ClickHouse destination table
+  changed_when: no
+  command: >
+    clickhouse-client --query
+    "CREATE TABLE IF NOT EXISTS molecule_tests.cities (id UInt32, City String)
+    ENGINE = MergeTree()
+    ORDER BY id;"
+
+- name: Create CH materialized view to move the data from a Kafka topic to a ClickHouse table
+  changed_when: no
+  command: >
+    clickhouse-client --query
+    "CREATE MATERIALIZED VIEW IF NOT EXISTS molecule_tests.city_mapping TO molecule_tests.cities AS
+    SELECT id, City FROM molecule_tests.consumer;"

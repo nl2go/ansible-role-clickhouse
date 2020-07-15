@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<yandex>
+    <kafka>
+            <security_protocol>sasl_plaintext</security_protocol>
+            <sasl_mechanism>PLAIN</sasl_mechanism>
+            <sasl_username>{{ kafka_client_users[0].username }}</sasl_username>
+            <sasl_password>{{ kafka_client_users[0].password }}</sasl_password>
+            <debug>all</debug>
+            <auto_offset_reset>latest</auto_offset_reset>
+            <compression_type>snappy</compression_type>
+    </kafka>
+</yandex>

@@ -1,6 +1,8 @@
 ---
 - name: Get ClickHouse service status
   command: service clickhouse-server status
+  args:
+    warn: no
   register: service_status
   changed_when: no
   ignore_errors: yes
