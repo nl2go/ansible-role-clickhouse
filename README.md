@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/nl2go/ansible-role-clickhouse.svg?branch=master)](https://travis-ci.org/nl2go/ansible-role-clickhouse)
-[![Ansible Galaxy](https://img.shields.io/badge/role-nl2go.clickhouse-blue.svg)](https://galaxy.ansible.com/nl2go/clickhouse/)
+[![Build Status](https://travis-ci.com/nl2go/ansible-role-clickhouse.svg?branch=master)](https://travis-ci.com/nl2go/ansible-role-clickhouse)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/nl2go/ansible-role-clickhouse)](https://galaxy.ansible.com/nl2go/clickhouse)
-[![Ansible Galaxy Downloads](https://img.shields.io/ansible/role/d/FIXME.svg?color=blue)](https://galaxy.ansible.com/nl2go/clickhouse/)
+[![Ansible Galaxy](https://img.shields.io/badge/role-nl2go.clickhouse-blue.svg)](https://galaxy.ansible.com/nl2go/clickhouse/)
+[![Ansible Galaxy Quality Score](https://img.shields.io/ansible/quality/49634)](https://galaxy.ansible.com/nl2go/clickhouse/)
+[![Ansible Galaxy Downloads](https://img.shields.io/ansible/role/d/49634.svg?color=blue)](https://galaxy.ansible.com/nl2go/clickhouse/)
 
 # Ansible Role: ClickHouse
 
@@ -45,6 +46,7 @@ Use following to run tests:
 ## Maintainers
 
 - [pablo2go](https://github.com/pablo2go)
+- [dirkaholic](https://github.com/dirkaholic)
 
 ## License
 
