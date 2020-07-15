@@ -17,6 +17,9 @@ provisioner:
   inventory:
     group_vars:
       all:
+        kafka_client_users:
+          - username: guest
+            password: guest
   lint: |
     set -e
     ansible-lint

@@ -1,0 +1,38 @@
+---
+- name: Install kafka server and client
+  import_role:
+    name: nl2go.kafka
+
+- name: Make sure Kafka is running
+  meta: flush_handlers
+
+- name: Create Kafka JAAS client config
+  copy:
+    content: |
+      KafkaClient {
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username="{{ kafka_client_users[0].username }}"
+        password="{{ kafka_client_users[0].password }}";
+      };
+    dest: "{{ kafka_test_client_sasl_conf }}"
+
+- name: Create Kafka client config
+  copy:
+    content: |
+      security.protocol=SASL_PLAINTEXT
+      sasl.mechanism=PLAIN
+    dest: "{{ kafka_test_client_conf }}"
+
+- name: Download jmxterm
+  get_url:
+    url: https://github.com/jiaqi/jmxterm/releases/download/v1.0.1/jmxterm-1.0.1-uber.jar
+    dest: /opt/jmxterm.jar
+    mode: '0755'
+
+- name: Create the topic in Kafka
+  run_once: yes
+  command: "/usr/local/kafka/bin/kafka-topics.sh --create --bootstrap-server {{ clickhouse_kafka_connection_hosts_str }} --replication-factor 3 --partitions 1 --topic {{ ch_kafka_topic }} --command-config {{ kafka_test_client_conf }}"
+  environment:
+    KAFKA_OPTS: "-Djava.security.auth.login.config={{ kafka_conf_dir }}/jaas.cfg"
+  register: result
+  failed_when: 'result.rc != 0 and "already exists" not in result.stderr'

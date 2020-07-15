@@ -11,7 +11,14 @@
 - name: Define CH log level
   template:
     src: log-level.xml.j2
-    dest: "{{ clickhouse_logs_conf }}"
+    dest: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"
+    mode: '0444'
+  notify: Restart ClickHouse
+
+- name: CH credentials to connect to Kafka
+  template:
+    src: kafka.xml.j2
+    dest: "{{ clickhouse_conf_dir }}/config.d/kafka.xml"
     mode: '0444'
   notify: Restart ClickHouse
 
