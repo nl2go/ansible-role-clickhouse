@@ -48,3 +48,5 @@ clickhouse_quotas: # More settings: https://clickhouse.tech/docs/en/operations/q
         result_rows: 0
         read_rows: 0
         execution_time: 0
+
+clickhouse_databases: []

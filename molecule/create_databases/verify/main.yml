@@ -1,0 +1,16 @@
+---
+- name: Verify ClickHouse state
+  hosts: all
+  vars:
+    clickhouse_conf_dir: "/etc/clickhouse-server"
+    clickhouse_logs_conf: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"
+    clickhouse_loglevel: "information"
+  tasks:
+    - shell: clickhouse-client --query='SHOW DATABASES;'|grep "{{ test_database }}"
+      changed_when: no
+      register: query_result
+    - name: Verify the result
+      assert:
+        that:
+          - query_result.rc == 0
+          - query_result.stdout|length > 0

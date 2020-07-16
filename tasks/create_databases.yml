@@ -1,0 +1,6 @@
+---
+- meta: flush_handlers
+
+- name: Create ClickHouse databases
+  command: clickhouse-client --query="CREATE DATABASE {{ item }};"
+  loop: "{{ clickhouse_databases | default([]) }}"
