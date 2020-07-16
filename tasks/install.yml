@@ -1,7 +1,7 @@
 ---
 - name: Add the APT Key for ClickHouse.
   apt_key:
-    keyserver: keyserver.ubuntu.com
+    keyserver: "{{ clickhouse_key_server }}"
     id: E0C56BD4
     state: present
 
