@@ -48,6 +48,15 @@ The `users` section of the `user.xml` configuration file contains user  [setting
 
 Quota [settings](https://clickhouse.tech/docs/en/operations/settings/settings-profiles/) is for limiting resource usage over a period of time or track the use of resources.
 
+**clickhouse_databases** is a list of the databases you want to create in ClickHouse:
+
+```
+clickhouse_databases:
+  - these_metrics
+  - other_metrics
+  - imported_data
+```
+
 ## Dependencies
 
 None.
