@@ -3,3 +3,5 @@
     tags: [clickhouse, clickhouse_install, install]
   - import_tasks: config.yml
     tags: [clickhouse, clickhouse_config, config]
+  - import_tasks: create_databases.yml
+    tags: [clickhouse, clickhouse_create_databases, create_databases]
