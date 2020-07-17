@@ -20,6 +20,7 @@ clickhouse_path: /var/lib/clickhouse/
 clickhouse_tmp_path: /var/lib/clickhouse/tmp/
 clickhouse_user_files_path: /var/lib/clickhouse/user_files/
 clickhouse_access_control_path: /var/lib/clickhouse/access/
+clickhouse_log_path: /var/log/clickhouse-server
 clickhouse_conf_dir: "/etc/clickhouse-server"
 clickhouse_logs_conf: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"
 clickhouse_loglevel: "information"  # More options: https://github.com/pocoproject/poco/blob/poco-1.9.4-release/Foundation/include/Poco/Logger.h#L105
@@ -50,3 +51,5 @@ clickhouse_quotas: # More settings: https://clickhouse.tech/docs/en/operations/q
         execution_time: 0
 
 clickhouse_databases: []
+clickhouse_group: clickhouse
+clickhouse_user: clickhouse
