@@ -51,14 +51,14 @@ provisioner:
         kafka_test_client_sasl_conf: /tmp/jaas.client.cfg
         kafka_test_client_conf: /tmp/client.properties
         kafka_conf_dir: /etc/kafka
-        kafka_client_users:
+        clickhouse_kafka_client_users:
           - username: guest
             password: guest
         kafka_host: "{{ ansible_default_ipv4.address }}"
         kafka_zookeeper_connection_hosts: "{{ groups['zookeeper'] | map('extract', hostvars, 'ansible_host') | map('regex_replace', '^(.*)', '\\1:2181') | list }}"
         kafka_version: 2.5.0
         zookeeper_members: "{{ groups['zookeeper'] | map('extract', hostvars, 'ansible_default_ipv4') | map(attribute='address') | list }}"
-        ch_kafka_topic: "molecule_tests_insert_data_via_kafka"
+        clickhouse_kafka_topic: "molecule_tests_insert_data_via_kafka"
         clickhouse_kafka_connection_hosts: "{{ groups['kafka'] | map('extract', hostvars, 'ansible_host') | map('regex_replace', '^(.*)', '\\1:9092') | list }}"
         clickhouse_kafka_connection_hosts_str: "{{ clickhouse_kafka_connection_hosts|join(',') }}"
       kafka:

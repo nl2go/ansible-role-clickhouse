@@ -7,4 +7,4 @@
       changed_when: no
       shell: >
         export KAFKA_OPTS="-Djava.security.auth.login.config={{ kafka_conf_dir }}/jaas.cfg";
-        /bin/echo "11,Zagreb" | /usr/local/kafka/bin/kafka-console-producer.sh --bootstrap-server {{ clickhouse_kafka_connection_hosts_str }} --topic {{ ch_kafka_topic }} --producer.config {{ kafka_test_client_conf }}
+        /bin/echo "11,Zagreb" | /usr/local/kafka/bin/kafka-console-producer.sh --bootstrap-server {{ clickhouse_kafka_connection_hosts_str }} --topic {{ clickhouse_kafka_topic }} --producer.config {{ kafka_test_client_conf }}
