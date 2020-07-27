@@ -21,7 +21,7 @@
     "CREATE TABLE IF NOT EXISTS molecule_tests.consumer(id UInt32, City String)
     ENGINE = Kafka
     SETTINGS kafka_broker_list = '{{ clickhouse_kafka_connection_hosts_str }}',
-    kafka_topic_list = '{{ ch_kafka_topic }}',
+    kafka_topic_list = '{{ clickhouse_kafka_topic }}',
     kafka_group_name = 'consumer_group1',
     kafka_format = 'CSV',
     kafka_skip_broken_messages = 1,

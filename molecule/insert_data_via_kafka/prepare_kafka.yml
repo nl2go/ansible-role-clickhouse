@@ -31,7 +31,7 @@
 
 - name: Create the topic in Kafka
   run_once: yes
-  command: "/usr/local/kafka/bin/kafka-topics.sh --create --bootstrap-server {{ clickhouse_kafka_connection_hosts_str }} --replication-factor 3 --partitions 1 --topic {{ ch_kafka_topic }} --command-config {{ kafka_test_client_conf }}"
+  command: "/usr/local/kafka/bin/kafka-topics.sh --create --bootstrap-server {{ clickhouse_kafka_connection_hosts_str }} --replication-factor 3 --partitions 1 --topic {{ clickhouse_kafka_topic }} --command-config {{ kafka_test_client_conf }}"
   environment:
     KAFKA_OPTS: "-Djava.security.auth.login.config={{ kafka_conf_dir }}/jaas.cfg"
   register: result
