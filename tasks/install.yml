@@ -10,9 +10,45 @@
     repo: deb https://repo.clickhouse.tech/deb/stable/ main/
     state: present
 
+# It is assumed that clickhouse-server creates user and group clickhouse. They are used along the role.
 - name: Install ClickHouse
   apt:
     pkg:
       - clickhouse-server
       - clickhouse-client
   notify: Enable ClickHouse
+
+- name: Install | Prepare CH directory.
+  file:
+    path: /data/clickhouse/
+    owner: clickhouse
+    group: clickhouse
+    mode: '0775'
+    state: directory
+
+# it is assumed that clickhouse_path is under /data/clickhouse
+- name: Install | Prepare CH directory for data
+  file:
+    path: "{{ clickhouse_path}}"
+    owner: clickhouse
+    group: clickhouse
+    mode: '0775'
+    state: directory
+
+# it is assumed that clickhouse_log_directory is under /data/clickhouse
+- name: Install | Set root:clickhouse as owner of the log directory
+  file:
+    path: "{{ clickhouse_log_directory }}"
+    state: directory
+    owner: clickhouse
+    group: clickhouse
+    mode: '0755'
+
+# CH can do its own logrotation, but I think this is responsability of logrotate, no CH.
+- name: Install | Logrotate CH logs
+  template:
+    src: clickhouse.logrotate.j2
+    dest: "/etc/logrotate.d/clickhouse"
+    owner: root
+    group: root
+    mode: '0644'

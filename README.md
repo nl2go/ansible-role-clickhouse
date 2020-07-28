@@ -57,6 +57,22 @@ clickhouse_databases:
   - imported_data
 ```
 
+**clickhouse_zookeeper_hosts** is the list of zookeeper nodes ClickHouse will connect to. You will need this for replication:
+
+```
+clickhouse_zookeeper_hosts:
+  - host: 1.2.3.4
+    port: 2181
+  - host: 1.2.3.5
+    port: 2181
+```
+
+For debugging purposes it is better to start just with one host and then add more hosts.
+
+**clickhouse_zookeeper_credentials** in format ``username:password`` is used to authenticate against Zookeeper.
+**clickhouse_path**: Path to the directory where ClickHouse will store data
+**clickhouse_log_directory**: Path to the error and normal logs.
+
 ## Dependencies
 
 None.

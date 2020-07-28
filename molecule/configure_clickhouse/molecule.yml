@@ -8,6 +8,8 @@ platforms:
   - name: ${MOLECULE_TEST_SCOPE:-default}-instance1
     server_type: cx11
     image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - clickhouse
 
 provisioner:
   name: ansible
@@ -20,6 +22,17 @@ provisioner:
         clickhouse_kafka_client_users:
           - username: guest
             password: guest
+    host_vars:
+      default-instance1:
+        clickhouse_replica_id: single-replica
+        clickhouse_interserver_http_host: "{{ ansible_default_ipv4.address }}"
+        clickhouse_listen_addresses:
+          - "{{ ansible_default_ipv4.address }}"
+        clickhouse_timezone: Europe/Berlin
+        clickhouse_display_name: default-instance1-ch
+        clickhouse_replication_port: 9009
+        clickhouse_zookeeper_credentials: bob:secret_password
+        clickhouse_zookeeper_hosts: []
   lint: |
     set -e
     ansible-lint

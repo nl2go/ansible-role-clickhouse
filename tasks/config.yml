@@ -1,30 +1,51 @@
 ---
-- name: Create ClickHouse configuration file
+- name: Config | Set ClickHouse configuration file
   template:
     src: config.xml.j2
     dest: "{{ clickhouse_conf_dir }}/config.xml"
     owner: root
     group: root
-    mode: '0664'
+    mode: '0644'
   notify: Restart ClickHouse
 
-- name: Define CH log level
+- name: Config | Logging configuration
   template:
     src: log-level.xml.j2
     dest: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"
-    mode: '0444'
+    mode: '0644'
   notify: Restart ClickHouse
 
-- name: CH credentials to connect to Kafka
+- name: Config | Kafka <-> CH interface
   template:
     src: kafka.xml.j2
     dest: "{{ clickhouse_conf_dir }}/config.d/kafka.xml"
-    mode: '0444'
+    mode: '0644'
   notify: Restart ClickHouse
 
 - name: Config | Generate users config
   template:
     src: users.xml.j2
     dest: "{{ clickhouse_conf_dir }}/users.xml"
+    mode: '0644'
+  notify: Restart ClickHouse
+
+- name: Config | Zookeeper config.
+  template:
+    src: zookeeper.xml.j2
+    dest: "{{ clickhouse_conf_dir }}/config.d/zookeeper.xml"
+    mode: '0644'
+  notify: Restart ClickHouse
+
+- name: Config | Macros config.
+  template:
+    src: macros.xml.j2
+    dest: "{{ clickhouse_conf_dir }}/config.d/macros.xml"
+    mode: '0644'
+  notify: Restart ClickHouse
+
+- name: Config | CH instances config.
+  template:
+    src: instances.xml.j2
+    dest: "{{ clickhouse_conf_dir }}/config.d/instances.xml"
     mode: '0644'
   notify: Restart ClickHouse

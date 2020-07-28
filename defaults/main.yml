@@ -20,13 +20,16 @@ clickhouse_path: /var/lib/clickhouse/
 clickhouse_tmp_path: /var/lib/clickhouse/tmp/
 clickhouse_user_files_path: /var/lib/clickhouse/user_files/
 clickhouse_access_control_path: /var/lib/clickhouse/access/
-clickhouse_conf_dir: "/etc/clickhouse-server"
+clickhouse_format_schema_path: /var/lib/clickhouse/format_schemas/
+clickhouse_conf_dir: /etc/clickhouse-server
 clickhouse_logs_conf: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"
 clickhouse_loglevel: "information"  # More options: https://github.com/pocoproject/poco/blob/poco-1.9.4-release/Foundation/include/Poco/Logger.h#L105
+clickhouse_log_directory: /var/log/clickhouse-server
 clickhouse_users_config: users.xml
 clickhouse_default_profile: default
 clickhouse_default_database: default
 clickhouse_mlock_executable: true
+clickhouse_display_name: testing-clickhouse-node
 clickhouse_profiles: # More settings: https://clickhouse.tech/docs/en/operations/settings/settings-profiles/
   default:
     max_memory_usage: 10000000000
@@ -50,3 +53,6 @@ clickhouse_quotas: # More settings: https://clickhouse.tech/docs/en/operations/q
         execution_time: 0
 
 clickhouse_databases: []
+
+clickhouse_zookeeper_hosts: []
+clickhouse_internal_dns_disabled: 0

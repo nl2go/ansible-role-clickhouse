@@ -1,4 +1,6 @@
 ---
+  - import_tasks: vars.yml
+    tags: [clickhouse, clickhouse_vars, vars]
   - import_tasks: install.yml
     tags: [clickhouse, clickhouse_install, install]
   - import_tasks: config.yml
