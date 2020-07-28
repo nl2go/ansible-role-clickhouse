@@ -22,8 +22,7 @@ provisioner:
         clickhouse_kafka_client_users:
           - username: guest
             password: guest
-    host_vars:
-      default-instance1:
+      clickhouse:
         clickhouse_replica_id: single-replica
         clickhouse_interserver_http_host: "{{ ansible_default_ipv4.address }}"
         clickhouse_listen_addresses:
