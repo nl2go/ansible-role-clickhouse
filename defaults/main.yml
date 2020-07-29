@@ -35,7 +35,7 @@ clickhouse_profiles: # More settings: https://clickhouse.tech/docs/en/operations
 
 clickhouse_users: # More settings: https://clickhouse.tech/docs/en/operations/settings/settings-users/
   default:
-    password: "qwerty"
+    password: ""
     profile: "default"
     quota: "default"
 
