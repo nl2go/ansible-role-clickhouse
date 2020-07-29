@@ -21,10 +21,11 @@
         {% endif %}
         <{{ user_name }}>
             {% if user_settings.password is defined and user_settings.password_sha256_hex is not defined %}
-            <password>{{ user_settings.password }}</password>
-            {% elif user_settings.password_sha256_hex is defined %}
-            <password_sha256_hex>{{ user_settings.password_sha256_hex }}</password_sha256_hex>
+            <password_sha256_hex>{{ user_settings.password|hash('sha256') }}</password_sha256_hex>
+            {% else %}
+            <password_sha256_hex></password_sha256_hex>
             {% endif %}
+            <password_sha256_hex>{{ user_settings.password|hash('sha256') }}</password_sha256_hex>
             {% if user_settings.networks is defined %}
             <networks incl="networks" replace="replace">
             {% for net in user_settings.networks %}
