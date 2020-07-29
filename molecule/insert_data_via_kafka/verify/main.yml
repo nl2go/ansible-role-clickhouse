@@ -10,3 +10,4 @@
         that:
           - query_result.rc == 0
           - query_result.stdout|length > 0
+          - "'Zagreb' in query_result.stdout"
