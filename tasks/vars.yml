@@ -39,3 +39,8 @@
 - name: Config | Add default quota if not exists in quotas
   set_fact:
     clickhouse_profiles: "{{ default_quota | combine(clickhouse_quotas, recursive=True) }}"
+
+- name: Set user and group
+  set_fact:
+    clickhouse_group: clickhouse
+    clickhouse_user: clickhouse

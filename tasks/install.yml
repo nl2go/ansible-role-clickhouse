@@ -1,16 +1,4 @@
 ---
-- name: Create ClickHouse group
-  group:
-    name: "{{ clickhouse_group }}"
-    state: present
-
-- name: Create ClickHouse user
-  user:
-    name: "{{ clickhouse_user }}"
-    group: "{{ clickhouse_group }}"
-    state: present
-    createhome: no
-
 - name: Add the APT Key for ClickHouse.
   apt_key:
     keyserver: "{{ clickhouse_key_server }}"

@@ -51,5 +51,3 @@ clickhouse_quotas: # More settings: https://clickhouse.tech/docs/en/operations/q
         execution_time: 0
 
 clickhouse_databases: []
-clickhouse_group: clickhouse
-clickhouse_user: clickhouse
