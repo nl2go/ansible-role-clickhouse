@@ -18,7 +18,7 @@ provisioner:
     group_vars:
       all:
         test_database: scooby_doo
-        kafka_client_users:
+        clickhouse_kafka_client_users:
           - username: guest
             password: guest
         clickhouse_databases:
