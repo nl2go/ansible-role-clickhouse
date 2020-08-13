@@ -18,6 +18,7 @@
       - clickhouse-client
   notify: Enable ClickHouse
 
+# FIXME try to remove this, because the proper thing is to create {{ clickhouse_path }}
 - name: Install | Prepare CH directory.
   file:
     path: /data/clickhouse/
@@ -25,24 +26,6 @@
     group: clickhouse
     mode: '0775'
     state: directory
-
-# it is assumed that clickhouse_path is under /data/clickhouse
-- name: Install | Prepare CH directory for data
-  file:
-    path: "{{ clickhouse_path}}"
-    owner: clickhouse
-    group: clickhouse
-    mode: '0775'
-    state: directory
-
-# it is assumed that clickhouse_log_directory is under /data/clickhouse
-- name: Install | Set root:clickhouse as owner of the log directory
-  file:
-    path: "{{ clickhouse_log_directory }}"
-    state: directory
-    owner: clickhouse
-    group: clickhouse
-    mode: '0755'
 
 # CH can do its own logrotation, but I think this is responsability of logrotate, no CH.
 - name: Install | Logrotate CH logs
@@ -52,3 +35,27 @@
     owner: root
     group: root
     mode: '0644'
+
+- name: Create non sensitive ClickHouse directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ clickhouse_user }}"
+    group: "{{ clickhouse_group }}"
+  loop:
+    - "{{ clickhouse_conf_dir }}"
+
+- name: Create sensitive ClickHouse directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0750"
+    owner: "{{ clickhouse_user }}"
+    group: "{{ clickhouse_group }}"
+  loop:
+    - "{{ clickhouse_path }}"
+    - "{{ clickhouse_user_files_path }}"
+    - "{{ clickhouse_access_control_path }}"
+    - "{{ clickhouse_tmp_path }}"
+    - "{{ clickhouse_log_directory }}"
