@@ -30,7 +30,7 @@ A settings profile is a collection of [settings](https://clickhouse.tech/docs/en
 
     clickhouse_profiles: 
       default:
-        password: "qwerty" # or `password_sha256_hex` to assign a password using its SHA256 hash
+        password: "qwerty"
         profile: "default"
         quota: "default"
 
