@@ -29,7 +29,7 @@
 - name: Config | Generate users config
   template:
     src: users.xml.j2
-    dest: "{{ clickhouse_conf_dir }}/users.xml"
+    dest: "{{ clickhouse_conf_dir }}/{{ clickhouse_users_config }}"
     mode: "0644"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
