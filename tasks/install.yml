@@ -16,3 +16,27 @@
       - clickhouse-server
       - clickhouse-client
   notify: Enable ClickHouse
+
+- name: Create non sensitive ClickHouse directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ clickhouse_user }}"
+    group: "{{ clickhouse_group }}"
+  loop:
+    - "{{ clickhouse_conf_dir }}"
+    - "{{ clickhouse_log_path }}"
+
+- name: Create sensitive ClickHouse directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0750"
+    owner: "{{ clickhouse_user }}"
+    group: "{{ clickhouse_group }}"
+  loop:
+    - "{{ clickhouse_path }}"
+    - "{{ clickhouse_user_files_path }}"
+    - "{{ clickhouse_access_control_path }}"
+    - "{{ clickhouse_tmp_path }}"
