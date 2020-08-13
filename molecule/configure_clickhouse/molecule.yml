@@ -20,6 +20,15 @@ provisioner:
         clickhouse_kafka_client_users:
           - username: guest
             password: guest
+        clickhouse_users:
+          default:
+            password: ""
+            profile: "default"
+            quota: "default"
+          sib:
+            password: "sib"
+            profile: "default"
+            quota: "default"
   lint: |
     set -e
     ansible-lint
