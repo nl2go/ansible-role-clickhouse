@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
+<!-- {{ ansible_managed }} -->
 <yandex>
     <logger>
+    <!-- Possible levels: https://github.com/pocoproject/poco/blob/poco-1.9.4-release/Foundation/include/Poco/Logger.h#L105 -->
         <level>{{ clickhouse_loglevel }}</level>
+        <log>{{ clickhouse_log_directory }}/clickhouse-server.log</log>
+        <errorlog>{{ clickhouse_log_directory }}/clickhouse-server.err.log</errorlog>
+        <size>100M</size> <!-- logrotate is responsible of log rotation, -->
+        <count>10</count> <!-- just keep big enough so CH won't rotate anything. -->
     </logger>
 </yandex>

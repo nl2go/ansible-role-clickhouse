@@ -7,27 +7,33 @@ clickhouse_http_port: 8123
 clickhouse_tcp_port: 9000
 clickhouse_mysql_port: 9004
 clickhouse_interserver_http_port: 9009
+
 clickhouse_max_connections: 4096
 clickhouse_keep_alive_timeout: 3
 clickhouse_max_concurrent_queries: 100
+
+clickhouse_mlock_executable: true
 clickhouse_max_server_memory_usage: 0
 clickhouse_max_server_memory_usage_to_ram_ratio: 0.9
 clickhouse_total_memory_profiler_step: 4194304
 clickhouse_total_memory_tracker_sample_probability: 0
 clickhouse_uncompressed_cache_size: 8589934592
 clickhouse_mark_cache_size: 5368709120
-clickhouse_path: /var/lib/clickhouse/
-clickhouse_tmp_path: /var/lib/clickhouse/tmp/
-clickhouse_user_files_path: /var/lib/clickhouse/user_files/
-clickhouse_access_control_path: /var/lib/clickhouse/access/
-clickhouse_log_path: /var/log/clickhouse-server
-clickhouse_conf_dir: "/etc/clickhouse-server"
+
+clickhouse_path: /var/lib/clickhouse
+clickhouse_tmp_path: "{{ clickhouse_path }}/tmp"
+clickhouse_user_files_path: "{{ clickhouse_path }}/user_files"
+clickhouse_access_control_path: "{{ clickhouse_path }}/access"
+clickhouse_format_schema_path: "{{ clickhouse_path }}/format_schemas"
+clickhouse_conf_dir: /etc/clickhouse-server
+clickhouse_users_config: users.xml
 clickhouse_logs_conf: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"
 clickhouse_loglevel: "information"  # More options: https://github.com/pocoproject/poco/blob/poco-1.9.4-release/Foundation/include/Poco/Logger.h#L105
-clickhouse_users_config: users.xml
+clickhouse_log_directory: "{{ clickhouse_path }}/logs"
+
 clickhouse_default_profile: default
 clickhouse_default_database: default
-clickhouse_mlock_executable: true
+clickhouse_display_name: testing-clickhouse-node
 clickhouse_profiles: # More settings: https://clickhouse.tech/docs/en/operations/settings/settings-profiles/
   default:
     max_memory_usage: 10000000000
@@ -51,3 +57,6 @@ clickhouse_quotas: # More settings: https://clickhouse.tech/docs/en/operations/q
         execution_time: 0
 
 clickhouse_databases: []
+
+clickhouse_zookeeper_hosts: []
+clickhouse_internal_dns_disabled: 0

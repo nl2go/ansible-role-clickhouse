@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- {{ ansible_managed }} -->
+<yandex>
+    <zookeeper>{% for zookeeper_node in clickhouse_zookeeper_hosts %}
+        <node>
+            <host>{{ zookeeper_node.host }}</host>
+            <port>{{ zookeeper_node.port }}</port>
+        </node>
+        {% endfor %}
+        <identity><![CDATA[{{ clickhouse_zookeeper_credentials }}]]></identity>
+    </zookeeper>
+</yandex>
