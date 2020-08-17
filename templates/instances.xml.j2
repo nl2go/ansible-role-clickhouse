@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- {{ ansible_managed }} -->
+<yandex>
+    <remote_servers>
+        <replication_test_1shards_2replicas>
+            <shard>
+            <internal_replication>true</internal_replication>
+            {% for node_hostname in groups['clickhouse'] %}
+                <replica>
+                    <host>{{ node_hostname }}</host>
+                    <port>{{ clickhouse_replication_port }}</port>
+                 </replica>
+            {% endfor %}
+            </shard>
+        </replication_test_1shards_2replicas>
+    </remote_servers>
+</yandex>

@@ -1,0 +1,49 @@
+---
+- name: Set default profile
+  set_fact:
+    default_profile:
+      default:
+        max_memory_usage: 10000000000
+        use_uncompressed_cache: 0
+        load_balancing: "random"
+
+- name: Config | Add default profile if not exists in profiles
+  set_fact:
+    clickhouse_profiles: "{{ default_profile | combine(clickhouse_profiles, recursive=True) }}"
+
+- name: Set default user
+  set_fact:
+    default_user:
+      default:
+        password: ""
+        profile: "default"
+        quota: "default"
+        comment: "Default user for login if user not defined"
+
+- name: Config | Add default user if not exists in users
+  set_fact:
+    clickhouse_users: "{{ default_user | combine(clickhouse_users, recursive=True) }}"
+
+- name: Set default quota
+  set_fact:
+    default_quota:
+      default:
+        intervals:
+          - duration: 3600
+            queries: 0
+            errors: 0
+            result_rows: 0
+            read_rows: 0
+            execution_time: 0
+
+- name: Config | Add default quota if not exists in quotas
+  set_fact:
+    clickhouse_quotas: "{{ default_quota | combine(clickhouse_quotas, recursive=True) }}"
+
+- name: Config | Default Zookeeper port. The same for all ZKs.
+  set_fact:
+    zookeeper_port: 2181
+
+- name: Config | Default ClickHouse port. The same for all CHs.
+  set_fact:
+    clickhouse_port: 9000
