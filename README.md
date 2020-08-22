@@ -48,24 +48,23 @@ The `users` section of the `user.xml` configuration file contains user  [setting
 
 Quota [settings](https://clickhouse.tech/docs/en/operations/settings/settings-profiles/) is for limiting resource usage over a period of time or track the use of resources.
 
-**clickhouse_databases** is a list of the databases you want to create in ClickHouse:
+    clickhouse_databases: 
+      - these_metrics
+      - other_metrics
+      - imported_data
 
-```
-clickhouse_databases:
-  - these_metrics
-  - other_metrics
-  - imported_data
-```
+**clickhouse_databases** is a list of the databases you want to create in ClickHouse.
 
-**clickhouse_zookeeper_hosts** is the list of zookeeper nodes ClickHouse will connect to. You will need this for replication:
+    clickhouse_zookeeper_hosts: 
+      - 1.2.3.4
+      - 1.2.3.5
 
-```
-clickhouse_zookeeper_hosts:
-  - host: 1.2.3.4
-    port: 2181
-  - host: 1.2.3.5
-    port: 2181
-```
+
+**clickhouse_zookeeper_hosts** is the list of zookeeper nodes ClickHouse will connect to. You will need this for replication.
+
+    clickhouse_zookeeper_port: 2181
+
+**clickhouse_zookeeper_port** is the port of zookeeper nodes ClickHouse will connect to. You will need this for replication.
 
 For debugging purposes it is better to start just with one host and then add more hosts.
 

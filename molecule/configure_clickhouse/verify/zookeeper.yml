@@ -1,0 +1,11 @@
+---
+- name: Get Zookeeeper Configuration
+  shell: "cat {{ clickhouse_conf_dir }}/config.d/zookeeper.xml"
+  register: zookeper_config_result
+  changed_when: no
+
+- name: Verify nodes
+  assert:
+    that:
+      - zookeper_config_result.stdout.count('<node>') == clickhouse_zookeeper_hosts|length
+      - zookeper_config_result.stdout.count('</node>') == clickhouse_zookeeper_hosts|length

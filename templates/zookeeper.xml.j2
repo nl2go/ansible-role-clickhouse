@@ -3,8 +3,8 @@
 <yandex>
     <zookeeper>{% for zookeeper_node in clickhouse_zookeeper_hosts %}
         <node>
-            <host>{{ zookeeper_node.host }}</host>
-            <port>{{ zookeeper_node.port }}</port>
+            <host>{{ zookeeper_node }}</host>
+            <port>{{ clickhouse_zookeeper_port }}</port>
         </node>
         {% endfor %}
         <identity><![CDATA[{{ clickhouse_zookeeper_credentials }}]]></identity>

@@ -1,6 +1,21 @@
 ---
+- name: Install OpenJDK
+  hosts: zookeeper
+  roles:
+    - nl2go.openjdk
+
+- name: Install Zookeeper
+  hosts: zookeeper
+  vars:
+    zookeeper_members: "{{ groups['zookeeper'] | map('extract', hostvars, 'ansible_host') | list }}"
+    zookeeper_clients:
+      - username: bar
+        password: baz
+  roles:
+    - nl2go.zookeeper
+
 - name: Prepare the test environment by installing the clickhouse package
-  hosts: all
+  hosts: clickhouse
   vars:
     clickhouse_conf_dir: "/etc/clickhouse-server"
     clickhouse_logs_conf: "{{ clickhouse_conf_dir }}/config.d/log-level.xml"

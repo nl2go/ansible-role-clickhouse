@@ -1,6 +1,6 @@
 ---
 - name: Configure hosts
-  hosts: all
+  hosts: clickhouse
   become: yes
   vars:
     clickhouse_conf_dir: "/etc/clickhouse-server"
