@@ -53,3 +53,7 @@ verifier:
   lint: |
     set -e
     ansible-lint
+dependency:
+  name: galaxy
+  options:
+    role-file: molecule/resources/requirements.yml
