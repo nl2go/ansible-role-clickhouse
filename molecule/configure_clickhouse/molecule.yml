@@ -40,7 +40,7 @@ provisioner:
         clickhouse_zookeeper_port: 2181
     host_vars:
       "${MOLECULE_TEST_SCOPE:-default}-zk-1":
-        zookeeper_member_id: "{{ groups['zookeeper'] | map('extract', hostvars, 'ansible_host') | list | first }}"
+        zookeeper_member_id: 1
   lint: |
     set -e
     ansible-lint
