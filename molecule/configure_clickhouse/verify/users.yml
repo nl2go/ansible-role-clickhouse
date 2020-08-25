@@ -4,6 +4,8 @@
   register: user_config_result
   changed_when: no
 
+- debug: var=user_config_result.stdout
+
 - name: Verify profiles, users, quotas
   assert:
     that:
