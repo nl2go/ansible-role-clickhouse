@@ -4,8 +4,6 @@
   register: user_config_result
   changed_when: no
 
-- debug: var=user_config_result.stdout
-
 - name: Verify profiles, users, quotas
   assert:
     that:
@@ -15,8 +13,8 @@
       - "'</users>' in user_config_result.stdout"
       - "'<quotas>' in user_config_result.stdout"
       - "'</quotas>' in user_config_result.stdout"
-      - "'<acces_management>' in user_config_result.stdout"
-      - "'</acces_management>' in user_config_result.stdout"
+      - "'<access_management>' in user_config_result.stdout"
+      - "'</access_management>' in user_config_result.stdout"
 
 - name: Verify default profile, user and quota
   assert:
