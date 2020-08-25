@@ -25,6 +25,9 @@
             {% else %}
             <password_sha256_hex></password_sha256_hex>
             {% endif %}
+            {% if user_settings.access_management is defined %}
+            <access_management>{{ access_management }}</access_management>
+            {% endif %}
             {% if user_settings.networks is defined %}
             <networks incl="networks" replace="replace">
             {% for net in user_settings.networks %}
