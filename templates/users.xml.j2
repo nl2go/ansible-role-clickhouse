@@ -23,7 +23,7 @@
             {% if user_settings.password is defined %}
             <password_sha256_hex>{{ user_settings.password|hash('sha256') }}</password_sha256_hex>
             {% else %}
-            <password_sha256_hex></password_sha256_hex>
+            <password></password>
             {% endif %}
             {% if user_settings.networks is defined %}
             <networks incl="networks" replace="replace">

@@ -27,6 +27,15 @@ provisioner:
         clickhouse_kafka_client_users:
           - username: guest
             password: guest
+        clickhouse_users:
+          default:
+            password: ""
+            profile: "default"
+            quota: "default"
+          sib:
+            password: "sib"
+            profile: "default"
+            quota: "default"
       clickhouse:
         clickhouse_replica_id: single-replica
         clickhouse_interserver_http_host: "{{ ansible_default_ipv4.address }}"

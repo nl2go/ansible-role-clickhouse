@@ -1,5 +1,5 @@
 ---
-- name: Get Users Configuration
+- name: Get Users Configuration file content
   shell: "cat {{ clickhouse_conf_dir }}/users.xml"
   register: user_config_result
   changed_when: no
@@ -19,3 +19,13 @@
     that:
       - user_config_result.stdout.count('<default>') == 3
       - user_config_result.stdout.count('</default>') == 3
+
+- name: Connect to the database
+  shell: clickhouse-client --user=sib --password=sib --query='SHOW DATABASES;'
+  register: query_result
+  changed_when: no
+
+- name: Verify connection
+  assert:
+    that:
+      - query_result.rc == 0
