@@ -25,6 +25,7 @@
             {% else %}
             <password></password>
             {% endif %}
+            <access_management>{{ user_settings.access_management | default('0') }}</access_management>
             {% if user_settings.networks is defined %}
             <networks incl="networks" replace="replace">
             {% for net in user_settings.networks %}
