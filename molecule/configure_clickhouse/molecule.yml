@@ -5,6 +5,11 @@ lint: |
   set -e
   yamllint .
 platforms:
+  - name: ${MOLECULE_TEST_SCOPE:-default}-zk-1
+    server_type: cx11
+    image: ${MOLECULE_PLATFORM-debian-10}
+    groups:
+      - zookeeper
   - name: ${MOLECULE_TEST_SCOPE:-default}-instance1
     server_type: cx11
     image: ${MOLECULE_PLATFORM-debian-10}
@@ -30,8 +35,12 @@ provisioner:
         clickhouse_timezone: Europe/Berlin
         clickhouse_display_name: default-instance1-ch
         clickhouse_replication_port: 9009
-        clickhouse_zookeeper_credentials: bob:secret_password
-        clickhouse_zookeeper_hosts: []
+        clickhouse_zookeeper_credentials: bar:baz
+        clickhouse_zookeeper_hosts: "{{ groups['zookeeper'] | map('extract', hostvars, 'ansible_host') | list }}"
+        clickhouse_zookeeper_port: 2181
+    host_vars:
+      "${MOLECULE_TEST_SCOPE:-default}-zk-1":
+        zookeeper_member_id: 1
   lint: |
     set -e
     ansible-lint
@@ -44,3 +53,7 @@ verifier:
   lint: |
     set -e
     ansible-lint
+dependency:
+  name: galaxy
+  options:
+    role-file: molecule/resources/requirements.yml

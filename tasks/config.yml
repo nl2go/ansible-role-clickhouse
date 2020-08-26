@@ -39,7 +39,7 @@
   template:
     src: zookeeper.xml.j2
     dest: "{{ clickhouse_conf_dir }}/config.d/zookeeper.xml"
-    mode: '0664'
+    mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
   notify: Restart ClickHouse
@@ -48,7 +48,7 @@
   template:
     src: macros.xml.j2
     dest: "{{ clickhouse_conf_dir }}/config.d/macros.xml"
-    mode: '0664'
+    mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
   notify: Restart ClickHouse
@@ -57,7 +57,7 @@
   template:
     src: instances.xml.j2
     dest: "{{ clickhouse_conf_dir }}/config.d/instances.xml"
-    mode: '0664'
+    mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
   notify: Restart ClickHouse

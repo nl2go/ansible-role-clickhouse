@@ -59,4 +59,5 @@ clickhouse_quotas: # More settings: https://clickhouse.tech/docs/en/operations/q
 clickhouse_databases: []
 
 clickhouse_zookeeper_hosts: []
+clickhouse_zookeeper_port: 2181
 clickhouse_internal_dns_disabled: 0
