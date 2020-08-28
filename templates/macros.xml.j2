@@ -2,8 +2,8 @@
 <!-- {{ ansible_managed }} -->
 <yandex>
     <macros>
-        <cluster>replication_test_1shards_2replicas</cluster>
+        <cluster>{{ clickhouse_display_name | default('clickhouse') }}</cluster>
         <shard>01</shard>
-        <replica>{{ clickhouse_replica_id }}</replica>
+        <replica>{{ inventory_hostname }}</replica>
     </macros>
 </yandex>
