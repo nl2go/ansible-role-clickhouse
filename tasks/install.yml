@@ -59,3 +59,10 @@
     - "{{ clickhouse_access_control_path }}"
     - "{{ clickhouse_tmp_path }}"
     - "{{ clickhouse_log_directory }}"
+
+- name: Add the Datadog Agent user to the clickhouse group
+  # so it can read the logs
+  user:
+    name: dd-agent
+    groups: "{{ clickhouse_group }}"
+    append: yes
