@@ -6,6 +6,8 @@
 
 - name: Prepare the test environment by installing and configuring zookeeper
   hosts: zookeeper
+  vars:
+    zookeeper_version: 3.6.2
   roles:
     - nl2go.zookeeper
 
