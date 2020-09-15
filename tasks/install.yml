@@ -18,15 +18,6 @@
       - clickhouse-client
   notify: Enable ClickHouse
 
-# FIXME try to remove this, because the proper thing is to create {{ clickhouse_path }}
-- name: Install | Prepare CH directory.
-  file:
-    path: /data/clickhouse/
-    owner: clickhouse
-    group: clickhouse
-    mode: '0775'
-    state: directory
-
 # CH can do its own logrotation, but I think this is responsability of logrotate, no CH.
 - name: Install | Logrotate CH logs
   template:
@@ -59,3 +50,9 @@
     - "{{ clickhouse_access_control_path }}"
     - "{{ clickhouse_tmp_path }}"
     - "{{ clickhouse_log_directory }}"
+
+- name: Add the Datadog Agent user to the clickhouse group so it can read the logs
+  user:
+    name: dd-agent
+    groups: "{{ clickhouse_group }}"
+    append: yes

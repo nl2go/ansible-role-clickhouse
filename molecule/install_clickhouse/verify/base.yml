@@ -11,3 +11,14 @@
   assert:
     that:
       - "'Active: ' in service_status.stdout"
+
+- name: Get groups for dd-agent user.
+  command: groups dd-agent
+  register: dd_agent_groups
+  changed_when: no
+
+- name: Verify dd-agent is in clickhouse group.
+  assert:
+    that:
+      - "dd_agent_groups.rc == 0"
+      - "'clickhouse' in dd_agent_groups.stdout"
