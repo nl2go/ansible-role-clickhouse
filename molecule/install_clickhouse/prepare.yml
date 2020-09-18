@@ -1,10 +1,3 @@
 ---
 - name: Prepare to test install_clickhouse (nothing to do)
   hosts: all
-  tasks:
-    - name: Create dd-agent to emulate Datadog Agent user.
-      user:
-        name: dd-agent
-        comment: Emulated Datadog Agent user.
-        shell: /bin/false
-        home: /tmp/
