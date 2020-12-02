@@ -3,7 +3,7 @@
 <yandex>
     <macros>
         <cluster>{{ clickhouse_display_name | default('clickhouse') }}</cluster>
-        <shard>01</shard>
+        <shard>{{ shard_number }}</shard>
         <replica>{{ inventory_hostname }}</replica>
     </macros>
 </yandex>
