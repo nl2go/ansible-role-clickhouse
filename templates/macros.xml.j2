@@ -3,7 +3,12 @@
 <yandex>
     <macros>
         <cluster>{{ clickhouse_display_name | default('clickhouse') }}</cluster>
-        <shard>{{ shard_number }}</shard>
+        {% if {{ inventory_hostname[11:12] == '1' or if {{ inventory_hostname[11:12] == '2'   }}}
+        <shard>01</shard>
+        {% endif %}
+        {% if {{ inventory_hostname[11:12] == '3' or if {{ inventory_hostname[11:12] == '4'   }}}
+        <shard>02</shard>
+        {% endif %}
         <replica>{{ inventory_hostname }}</replica>
     </macros>
 </yandex>
