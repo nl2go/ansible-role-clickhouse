@@ -3,7 +3,12 @@
 <yandex>
     <macros>
         <cluster>{{ clickhouse_display_name | default('clickhouse') }}</cluster>
+        {% if node_hostname in groups['clickhouse_shard01'] %}
         <shard>01</shard>
+        {% endif %}
+        {% if node_hostname in groups['clickhouse_shard02'] %}
+        <shard>02</shard>
+        {% endif %}
         <replica>{{ inventory_hostname }}</replica>
     </macros>
 </yandex>

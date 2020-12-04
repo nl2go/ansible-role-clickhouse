@@ -5,7 +5,16 @@
         <replication_test_1shards_2replicas>
             <shard>
             <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse'] %}
+            {% for node_hostname in groups['clickhouse_shard01'] %}
+                <replica>
+                    <host>{{ node_hostname }}</host>
+                    <port>{{ clickhouse_replication_port }}</port>
+                 </replica>
+            {% endfor %}
+            </shard>
+            <shard>
+            <internal_replication>true</internal_replication>
+            {% for node_hostname in groups['clickhouse_shard02'] %}
                 <replica>
                     <host>{{ node_hostname }}</host>
                     <port>{{ clickhouse_replication_port }}</port>
