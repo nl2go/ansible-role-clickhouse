@@ -20,6 +20,8 @@ before_script:
 
     # script:
     #   - docker-compose exec -e HCLOUD_TOKEN="$HCLOUD_TOKEN" -e MOLECULE_TEST_SCOPE="$MOLECULE_TEST_SCOPE" -e MOLECULE_PLATFORM="$MOLECULE_PLATFORM" molecule molecule test --all
+script:
+  - /bin/true
 
 after_script:
   - docker-compose down
