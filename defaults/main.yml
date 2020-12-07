@@ -1,12 +1,13 @@
 ---
 ## Basic ClickHouse configuration settings
 ## See more information about every setting in the config template
-clickhouse_key_server: pgpkeys.co.uk
+clickhouse_key_server: hkp://keyserver.ubuntu.com:80
 clickhouse_listen_host: 127.0.0.1
 clickhouse_http_port: 8123
 clickhouse_tcp_port: 9000
 clickhouse_mysql_port: 9004
 clickhouse_interserver_http_port: 9009
+clickhouse_version: 20.5.2.7
 
 clickhouse_max_connections: 4096
 clickhouse_keep_alive_timeout: 3
