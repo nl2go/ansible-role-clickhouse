@@ -1,9 +1,19 @@
 ---
+- name: Install multiple packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - dirmngr
+    update_cache: yes
+  become: true
+
 - name: Add the APT Key for ClickHouse.
   apt_key:
     keyserver: "{{ clickhouse_key_server }}"
     id: E0C56BD4
     state: present
+  become: true
 
 - name: Add ClickHouse APT sources
   apt_repository:
@@ -14,9 +24,9 @@
 - name: Install ClickHouse
   apt:
     pkg:
-      - clickhouse-server=20.5.2.7
-      - clickhouse-client=20.5.2.7
-      - clickhouse-common-static=20.5.2.7
+      - clickhouse-server="{{ clickhouse_version }}"
+      - clickhouse-client="{{ clickhouse_version }}"
+      - clickhouse-common-static="{{ clickhouse_version }}"
   notify: Enable ClickHouse
 
 # CH can do its own logrotation, but I think this is responsability of logrotate, no CH.
