@@ -24,9 +24,9 @@
 - name: Install ClickHouse
   apt:
     pkg:
-      - clickhouse-server="{{ clickhouse_version }}"
-      - clickhouse-client="{{ clickhouse_version }}"
-      - clickhouse-common-static="{{ clickhouse_version }}"
+      - clickhouse-server={{ clickhouse_version }}
+      - clickhouse-client={{ clickhouse_version }}
+      - clickhouse-common-static={{ clickhouse_version }}
   notify: Enable ClickHouse
 
 # CH can do its own logrotation, but I think this is responsability of logrotate, no CH.
