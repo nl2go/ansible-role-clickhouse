@@ -8,7 +8,7 @@
             {% for node_hostname in groups['clickhouse_shard01'] %}
                 <replica>
                     <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_replication_port }}</port>
+                    <port>{{ clickhouse_tcp_port }}</port>
                  </replica>
             {% endfor %}
             </shard>
@@ -17,7 +17,7 @@
             {% for node_hostname in groups['clickhouse_shard02'] %}
                 <replica>
                     <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_replication_port }}</port>
+                    <port>{{ clickhouse_tcp_port }}</port>
                  </replica>
             {% endfor %}
             </shard>
