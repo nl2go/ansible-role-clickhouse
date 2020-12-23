@@ -2,7 +2,7 @@
 <!-- {{ ansible_managed }} -->
 <yandex>
     <remote_servers>
-        <replication_test_1shards_2replicas>
+        <distributed_cluster>
             <shard>
             <internal_replication>true</internal_replication>
             {% for node_hostname in groups['clickhouse_ip-shard01'] %}
@@ -21,6 +21,6 @@
                  </replica>
             {% endfor %}
             </shard>
-        </replication_test_1shards_2replicas>
+        </distributed_cluster>
     </remote_servers>
 </yandex>
