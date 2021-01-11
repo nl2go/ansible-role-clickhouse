@@ -9,6 +9,8 @@
                 <replica>
                     <host>{{ node_hostname }}</host>
                     <port>{{ clickhouse_tcp_port }}</port>
+                    <user>app_sib</user>
+                    <password></password>
                  </replica>
             {% endfor %}
             </shard>
@@ -18,6 +20,8 @@
                 <replica>
                     <host>{{ node_hostname }}</host>
                     <port>{{ clickhouse_tcp_port }}</port>
+                    <user>app_sib</user>
+                    <password></password>
                  </replica>
             {% endfor %}
             </shard>
