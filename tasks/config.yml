@@ -51,7 +51,6 @@
     mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
-  notify: Restart ClickHouse
 
 - name: Config | CH instances config.
   template:
@@ -60,4 +59,3 @@
     mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
-  notify: Restart ClickHouse
