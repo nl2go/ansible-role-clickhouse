@@ -40,6 +40,7 @@ clickhouse_profiles: # More settings: https://clickhouse.tech/docs/en/operations
     max_memory_usage: 10000000000
     use_uncompressed_cache: 0
     load_balancing: "random"
+    optimize_skip_unused_shards: 1
 
 clickhouse_users: # More settings: https://clickhouse.tech/docs/en/operations/settings/settings-users/
   default:
