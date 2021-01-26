@@ -9,6 +9,18 @@
         {% if inventory_hostname in groups['clickhouse_shard02'] %}
         <shard>02</shard>
         {% endif %}
+        {% if inventory_hostname in groups['clickhouse_shard03'] %}
+        <shard>03</shard>
+        {% endif %}
+        {% if inventory_hostname in groups['clickhouse_shard04'] %}
+        <shard>04</shard>
+        {% endif %}
+        {% if inventory_hostname in groups['clickhouse_shard05'] %}
+        <shard>05</shard>
+        {% endif %}
+        {% if inventory_hostname in groups['clickhouse_shard06'] %}
+        <shard>06</shard>
+        {% endif %}
         <replica>{{ inventory_hostname }}</replica>
         <distributed_clusters>distributed_cluster</distributed_clusters>
     </macros>
