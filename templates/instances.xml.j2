@@ -69,6 +69,50 @@
                  </replica>
             {% endfor %}
             </shard>
+            <shard>
+            <internal_replication>true</internal_replication>
+            {% for node_hostname in groups['clickhouse_ip-shard07'] %}
+                <replica>
+                    <host>{{ node_hostname }}</host>
+                    <port>{{ clickhouse_tcp_port }}</port>
+                    <user>app_sib</user>
+                    <password></password>
+                 </replica>
+            {% endfor %}
+            </shard>
+            <shard>
+            <internal_replication>true</internal_replication>
+            {% for node_hostname in groups['clickhouse_ip-shard08'] %}
+                <replica>
+                    <host>{{ node_hostname }}</host>
+                    <port>{{ clickhouse_tcp_port }}</port>
+                    <user>app_sib</user>
+                    <password></password>
+                 </replica>
+            {% endfor %}
+            </shard>
+            <shard>
+            <internal_replication>true</internal_replication>
+            {% for node_hostname in groups['clickhouse_ip-shard09'] %}
+                <replica>
+                    <host>{{ node_hostname }}</host>
+                    <port>{{ clickhouse_tcp_port }}</port>
+                    <user>app_sib</user>
+                    <password></password>
+                 </replica>
+            {% endfor %}
+            </shard>
+            <shard>
+            <internal_replication>true</internal_replication>
+            {% for node_hostname in groups['clickhouse_ip-shard10'] %}
+                <replica>
+                    <host>{{ node_hostname }}</host>
+                    <port>{{ clickhouse_tcp_port }}</port>
+                    <user>app_sib</user>
+                    <password></password>
+                 </replica>
+            {% endfor %}
+            </shard>
         </distributed_cluster>
     </remote_servers>
 </yandex>
