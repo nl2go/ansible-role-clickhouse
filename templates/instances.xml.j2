@@ -1,20 +1,24 @@
+
 <?xml version="1.0"?>
 <!-- {{ ansible_managed }} -->
 <yandex>
-  <remote_servers>
-{% for cluster_name in clickhouse_clustersitems() | list %}
-    <{{ cluster_name }}>
-{% for shard_name, replicas in cluster_name.items() | list %}
-      <shard>
-        <internal_replication>true</internal_replication>
+    <remote_servers>
+{% for clusters_name, shards_name in clickhouse_clusters.items() | list %}
+        <{{ clusters_name }}>
+{% for shard_name, replicas  in shards_name.items() %}
+            <shard>
+            <internal_replication>true</internal_replication>
 {% for replica in replicas %}
-        <replica>
-          <host>{{ replica['host'] }}</host>
-          <port>{{ replica['port'] | default(9000) }}</port>
-        </replica>
+                <replica>
+                    <host>{{ replica['host'] }}</host>
+                    <host>{{ replica['port'] }}</host>
+                    <user>{{ clickhouse_distributed_user }}</user>
+                    <password></password>
+	        </replica>
 {% endfor %}
-      </shard>
-    </{{ shard_name }}>
+            </shard>
 {% endfor %}
-  </remote_servers>
+        </{{ clusters_name }}>
+{% endfor %}
+    </remote_servers>
 </yandex>
