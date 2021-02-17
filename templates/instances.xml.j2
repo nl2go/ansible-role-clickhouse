@@ -11,7 +11,7 @@
 {% for replica in replicas %}
                 <replica>
                     <host>{{ replica['host'] }}</host>
-                    <host>{{ replica['port'] }}</host>
+                    <port>{{ replica['port'] }}</port>
                     <user>{{ clickhouse_distributed_user }}</user>
                     <password></password>
 	        </replica>
