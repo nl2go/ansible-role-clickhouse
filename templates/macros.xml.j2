@@ -2,9 +2,9 @@
 <!-- {{ ansible_managed }} -->
 <yandex>
     <macros>
-        <cluster>{{ cluster }}</cluster>
-        <shard>{{ shard }}</shard>
+        <cluster>{{ clickhouse_cluster }}</cluster>
+        <shard>{{ clickhouse_shard }}</shard>
         <replica>{{ inventory_hostname }}</replica>
-        <distributed_clusters>{{ distributed_cluster }}</distributed_clusters>
+        <distributed_clusters>{{ clickouse_distributed_cluster }}</distributed_clusters>
     </macros>
 </yandex>

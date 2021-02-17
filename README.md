@@ -92,11 +92,13 @@ For debugging purposes it is better to start just with one host and then add mor
           - { host: "host_7", port: 9000 }
           - { host: "host_8", port: 9000 }
 
-**cluster**: is the cluster name which is used for replication in the macros.xml file.
+For the file macros.xml, you need to fill the variables below:
 
-**distributed_cluster**: is the distributed cluster name defined in **clickhouse_clusters**.
+**clickhouse_cluster**: is the cluster name which is used for replication.
 
-**shard**: is the shard number (01, 02) that being part of the replication inside one shard.
+**clickhouse_distributed_cluster**: is the distributed cluster name defined in **clickhouse_clusters**.
+
+**clickhouse_shard**: is the shard number (01, 02) that being part of the replication inside one shard.
 
 ## Dependencies
 
