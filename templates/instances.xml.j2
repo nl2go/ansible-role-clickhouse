@@ -1,118 +1,24 @@
+
 <?xml version="1.0"?>
 <!-- {{ ansible_managed }} -->
 <yandex>
     <remote_servers>
-        <distributed_cluster>
+{% for clusters_name, shards_name in clickhouse_clusters.items() | list %}
+        <{{ clusters_name }}>
+{% for shard_name, replicas  in shards_name.items() %}
             <shard>
             <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard01'] %}
+{% for replica in replicas %}
                 <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
+                    <host>{{ replica['host'] }}</host>
+                    <port>{{ replica['port'] }}</port>
+                    <user>{{ clickhouse_distributed_user }}</user>
                     <password></password>
-                 </replica>
-            {% endfor %}
+	        </replica>
+{% endfor %}
             </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard02'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard03'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard04'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard05'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard06'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard07'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard08'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard09'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-            <shard>
-            <internal_replication>true</internal_replication>
-            {% for node_hostname in groups['clickhouse_ip-shard10'] %}
-                <replica>
-                    <host>{{ node_hostname }}</host>
-                    <port>{{ clickhouse_tcp_port }}</port>
-                    <user>app_sib</user>
-                    <password></password>
-                 </replica>
-            {% endfor %}
-            </shard>
-        </distributed_cluster>
+{% endfor %}
+        </{{ clusters_name }}>
+{% endfor %}
     </remote_servers>
 </yandex>
