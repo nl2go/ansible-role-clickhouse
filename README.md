@@ -69,6 +69,7 @@ Quota [settings](https://clickhouse.tech/docs/en/operations/settings/settings-pr
 For debugging purposes it is better to start just with one host and then add more hosts.
 
 **clickhouse_zookeeper_credentials** in format ``username:password`` is used to authenticate against Zookeeper.
+
 **clickhouse_path**: Path to the directory where ClickHouse will store data
 **clickhouse_log_directory**: Path to the error and normal logs.
 **clickhouse_clusters**: is the list of clusters and also contains the shards that are part of each cluster.
