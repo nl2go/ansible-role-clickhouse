@@ -93,7 +93,9 @@ For debugging purposes it is better to start just with one host and then add mor
 
 
 **cluster**: is the cluster name which is used for replication in the macros.xml file.
+
 **distributed_cluster**: is the distributed cluster name defined in **clickhouse_clusters**
+
 **shard**: is the shard number (01, 02) that being part of the replication inside one shard
 
 ## Dependencies
