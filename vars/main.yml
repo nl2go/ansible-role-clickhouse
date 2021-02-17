@@ -2,5 +2,5 @@
 clickhouse_group: clickhouse
 clickhouse_user: clickhouse
 clickhouse_shard: 01
-clickouse_cluster: clickhouse-cluster
-clickouse_distributed_cluster: distributed_cluster
+clickhouse_cluster: clickhouse-cluster
+clickhouse_distributed_cluster: distributed_cluster
