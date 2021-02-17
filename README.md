@@ -71,8 +71,6 @@ For debugging purposes it is better to start just with one host and then add mor
 **clickhouse_zookeeper_credentials** in format ``username:password`` is used to authenticate against Zookeeper.
 **clickhouse_path**: Path to the directory where ClickHouse will store data
 **clickhouse_log_directory**: Path to the error and normal logs.
-
-
 **clickhouse_clusters**: is the list of clusters and also contains the shards that are part of each cluster.
 
     clickhouse_clusters:
@@ -91,12 +89,9 @@ For debugging purposes it is better to start just with one host and then add mor
           - { host: "host_7", port: 9000 }
           - { host: "host_8", port: 9000 }
 
-
 **cluster**: is the cluster name which is used for replication in the macros.xml file.
-
-**distributed_cluster**: is the distributed cluster name defined in **clickhouse_clusters**
-
-**shard**: is the shard number (01, 02) that being part of the replication inside one shard
+**distributed_cluster**: is the distributed cluster name defined in **clickhouse_clusters**.
+**shard**: is the shard number (01, 02) that being part of the replication inside one shard.
 
 ## Dependencies
 
