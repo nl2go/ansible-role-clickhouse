@@ -72,6 +72,30 @@ For debugging purposes it is better to start just with one host and then add mor
 **clickhouse_path**: Path to the directory where ClickHouse will store data
 **clickhouse_log_directory**: Path to the error and normal logs.
 
+
+**clickhouse_clusters**: is the list of clusters and also contains the shards that are part of each cluster.
+
+    clickhouse_clusters:
+      distributed_cluster_1:
+        shard1:
+          - { host: "host_1", port: 9000 }
+          - { host: "host_2", port: 9000 }
+        shard2:
+          - { host: "host_3", port: 9000 }
+          - { host: "host_4", port: 9000 }
+      distributed_cluster_2:
+        shard1:
+          - { host: "host_5", port: 9000 }
+          - { host: "host_6", port: 9000 }
+        shard2:
+          - { host: "host_7", port: 9000 }
+          - { host: "host_8", port: 9000 }
+
+
+**cluster**: is the cluster name which is used for replication in the macros.xml file.
+**distributed_cluster**: is the distributed cluster name defined in **clickhouse_clusters**
+**shard**: is the shard number (01, 02) that being part of the replication inside one shard
+
 ## Dependencies
 
 None.
