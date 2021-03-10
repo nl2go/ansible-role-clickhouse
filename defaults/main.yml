@@ -63,3 +63,9 @@ clickhouse_databases: []
 clickhouse_zookeeper_hosts: []
 clickhouse_zookeeper_port: 2181
 clickhouse_internal_dns_disabled: 0
+
+clickhouse_group: clickhouse
+clickhouse_user: clickhouse
+clickhouse_shard: 01
+clickhouse_cluster: clickhouse-cluster
+clickhouse_distributed_cluster: distributed_cluster
