@@ -41,6 +41,8 @@ clickhouse_profiles: # More settings: https://clickhouse.tech/docs/en/operations
     use_uncompressed_cache: 0
     load_balancing: "random"
     optimize_skip_unused_shards: 1
+    background_pool_size: 64
+    background_move_pool_size: 32
 
 clickhouse_users: # More settings: https://clickhouse.tech/docs/en/operations/settings/settings-users/
   default:
