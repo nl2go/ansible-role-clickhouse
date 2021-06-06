@@ -4,7 +4,7 @@
     <macros>
         <cluster>{{ clickhouse_cluster }}</cluster>
         <shard>{{ clickhouse_shard }}</shard>
-        <replica>{{ inventory_hostname }}</replica>
+        <replica>{{ clickhouse_replica_name }}</replica>
         <distributed_clusters>{{ clickhouse_distributed_cluster }}</distributed_clusters>
     </macros>
 </yandex>
