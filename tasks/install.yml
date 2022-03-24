@@ -17,7 +17,7 @@
 
 - name: Add ClickHouse APT sources
   apt_repository:
-    repo: deb https://packages.clickhouse.com/deb stable main/
+    repo: deb https://packages.clickhouse.com/deb/ stable main/
     state: present
 
 # It is assumed that clickhouse-server creates user and group clickhouse. They are used along the role.
