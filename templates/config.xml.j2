@@ -83,7 +83,7 @@ mark_cache_size
     <interserver_http_host>{{ clickhouse_interserver_http_host }}</interserver_http_host>
 
     <!-- Which addresses to listen on? At least localhost -->
-    <listen_host>127.0.0.1</listen_host>
+    <listen_host>0.0.0.0</listen_host>
     {% for ip_address in clickhouse_listen_addresses %}
     <listen_host>{{ ip_address }}</listen_host>
     {% endfor %}
