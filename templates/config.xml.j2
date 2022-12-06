@@ -83,9 +83,11 @@ mark_cache_size
 
     <!-- Which addresses to listen on? At least localhost -->
     <listen_host>0.0.0.0</listen_host>
+    <!--
     {% for ip_address in clickhouse_listen_addresses %}
     <listen_host>{{ ip_address }}</listen_host>
     {% endfor %}
+    -->
 
     <!-- Don't exit if ipv6 or ipv4 unavailable, but listen_host with this protocol specified -->
     <!-- <listen_try>0</listen_try> -->
