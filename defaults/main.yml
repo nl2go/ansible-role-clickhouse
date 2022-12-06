@@ -43,6 +43,7 @@ clickhouse_profiles: # More settings: https://clickhouse.tech/docs/en/operations
     optimize_skip_unused_shards: 1
     background_pool_size: 64
     background_move_pool_size: 32
+    max_partitions_per_insert_block: 120
 
 clickhouse_users: # More settings: https://clickhouse.tech/docs/en/operations/settings/settings-users/
   default:
