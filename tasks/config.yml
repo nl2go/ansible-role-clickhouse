@@ -7,6 +7,8 @@
     group: "{{ clickhouse_group }}"
     mode: "0664"
   notify: Restart ClickHouse
+  tags:
+    - ch-config
 
 - name: Config | Logging configuration
   template:
@@ -16,6 +18,8 @@
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
   notify: Restart ClickHouse
+  tags:
+    - ch-logging-config
 
 - name: Config | Kafka <-> CH interface
   template:
@@ -25,6 +29,8 @@
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
   notify: Restart ClickHouse
+  tags:
+    - ch-kafka-cfg
 
 - name: Config | Generate users config
   template:
@@ -33,6 +39,8 @@
     mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
+  tags:
+    - ch-usr-cfg
 
 - name: Config | Zookeeper config.
   template:
@@ -42,6 +50,8 @@
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
   notify: Restart ClickHouse
+  tags:
+    - ch-zk-cfg
 
 - name: Config | Macros config.
   template:
@@ -50,6 +60,8 @@
     mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
+  tags:
+    - ch-macros-cfg
 
 - name: Config | CH instances config.
   template:
@@ -58,3 +70,5 @@
     mode: "0664"
     owner: "{{ clickhouse_user }}"
     group: "{{ clickhouse_group }}"
+  tags:
+    - ch-instances-cfg
