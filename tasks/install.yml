@@ -11,13 +11,13 @@
 - name: Add the APT Key for ClickHouse.
   apt_key:
     keyserver: "{{ clickhouse_key_server }}"
-    id: 8919F6BD2B48D754
+    id: E0C56BD4
     state: present
   become: true
 
 - name: Add ClickHouse APT sources
   apt_repository:
-    repo: deb https://packages.clickhouse.com/deb/ stable main
+    repo: deb http://repo.yandex.ru/clickhouse/deb/stable/ main/
     state: present
 
 # It is assumed that clickhouse-server creates user and group clickhouse. They are used along the role.
