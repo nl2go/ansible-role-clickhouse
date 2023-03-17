@@ -9,6 +9,7 @@ clickhouse_mysql_port: 9004
 clickhouse_interserver_http_port: 9009
 clickhouse_version: 20.5.2.7
 clickhouse_deb_rep: "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/"
+clickhouse_deb_rep_key: E0C56BD4
 
 clickhouse_max_connections: 4096
 clickhouse_keep_alive_timeout: 3

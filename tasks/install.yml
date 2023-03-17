@@ -11,7 +11,7 @@
 - name: Add the APT Key for ClickHouse.
   apt_key:
     keyserver: "{{ clickhouse_key_server }}"
-    id: E0C56BD4
+    id: "{{ clickhouse_deb_rep_key }}"
     state: present
   become: true
 
