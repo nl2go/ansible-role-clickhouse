@@ -75,3 +75,4 @@ clickhouse_shard: 01
 clickhouse_cluster: clickhouse-cluster
 clickhouse_distributed_cluster: distributed_cluster
 clickhouse_temporary_clusters: temporary_cluster
+total_shards: 1
