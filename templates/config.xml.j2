@@ -273,4 +273,14 @@ mark_cache_size
     <format_schema_path>{{ clickhouse_format_schema_path }}</format_schema_path>
 
     <disable_internal_dns_cache>{{ clickhouse_internal_dns_disabled  }}</disable_internal_dns_cache>
+
+    {% if prometheus_enabled %}
+    <prometheus>
+        <endpoint>{{ prometheus_endpoint }} /endpoint>
+        <port>{{ prometheus_port }}</port>
+        <metrics>{{ prometheus_metrics }}</metrics>
+        <events>{{ prometheus_events }}</events>
+        <asynchronous_metrics>{{ prometheus_asynchronous_metrics }}</asynchronous_metrics>
+    </prometheus>
+    {% if endif %}
 </yandex>
