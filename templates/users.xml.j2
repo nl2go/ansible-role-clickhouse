@@ -2,13 +2,13 @@
 <yandex>
    <profiles>
     <!-- Profiles of settings. -->
-    {% for profile_name, profile_settings in clickhouse_profiles.items() %}
+{% for profile_name, profile_settings in clickhouse_profiles.items() %}
         <{{ profile_name }}>
-            {% for setting_name, setting_value in profile_settings.items() %}
+{% for setting_name, setting_value in profile_settings.items() %}
             <{{ setting_name }}>{{ setting_value }}</{{ setting_name }}>
-            {% endfor %}
+{% endfor %}
         </{{ profile_name }}>
-    {% endfor %}
+{% endfor %}
     <!-- Custom profiles end -->
     <!-- Profile that allows only read queries. -->
         <readonly>
@@ -18,67 +18,67 @@
 
     <!-- Users and ACL. -->
     <users>
-        {% for user_name, user_settings in clickhouse_users.items() %}
-        {% if user_settings.comment is defined %}
+{% for user_name, user_settings in clickhouse_users.items() %}
+{% if user_settings.comment is defined %}
         <!-- {{ user_settings.comment }} -->
-        {% endif %}
+{% endif %}
         <{{ user_name }}>
-            {% if user_settings.password is defined %}
+{% if user_settings.password is defined %}
             <password_sha256_hex>{{ user_settings.password|hash('sha256') }}</password_sha256_hex>
-            {% else %}
+{% else %}
             <password></password>
-            {% endif %}
+{% endif %}
             <access_management>{{ user_settings.access_management | default('0') }}</access_management>
-            {% if user_settings.networks is defined %}
+{% if user_settings.networks is defined %}
             <networks incl="networks" replace="replace">
-            {% for net in user_settings.networks %}
+{% for net in user_settings.networks %}
             <ip>{{ net }}</ip>
-            {% endfor %}
-            </networks>
-            {% endif %}
+{% endfor %}
+                </networks>
+{% endif %}
             <profile>{{ user_settings.profile if user_settings.profile is defined else 'default' }}</profile>
             <quota>{{ user_settings.quota if user_settings.quota is defined else 'default' }}</quota>
-            {% if user_settings.dbs is defined %}
+{% if user_settings.dbs is defined %}
             <allow_databases>
-            {% for db in user_settings.dbs %}
+{% for db in user_settings.dbs %}
                 <database>{{ db }}</database>
-            {% endfor %}
+{% endfor %}
             </allow_databases>
-            {% endif %}
+{% endif %}
         </{{ user_name }}>
-        {% endfor %}
+{% endfor %}
     </users>
 
     <!-- Quotas. -->
     <quotas>
-        {% for quota_name, quota_settings in clickhouse_quotas.items() %}
-        {% if quota_settings.comment is defined %}
+{% for quota_name, quota_settings in clickhouse_quotas.items() %}
+{% if quota_settings.comment is defined %}
         <!-- {{ quota_settings.comment }} -->
-        {% endif %}
+{% endif %}
         <{{ quota_name }}>
-            {% for interval in quota_settings.intervals %}
+{% for interval in quota_settings.intervals %}
             <interval>
-                {% if interval.duration is defined %}
+{% if interval.duration is defined %}
                 <duration>{{ interval.duration }}</duration>
-                {% endif %}
-                {% if interval.queries is defined %}
+{% endif %}
+{% if interval.queries is defined %}
                 <queries>{{ interval.queries }}</queries>
-                {% endif %}
-                {% if interval.errors is defined %}
+{% endif %}
+{% if interval.errors is defined %}
                 <errors>{{ interval.errors }}</errors>
-                {% endif %}
-                {% if interval.result_rows is defined %}
+{% endif %}
+{% if interval.result_rows is defined %}
                 <result_rows>{{ interval.result_rows }}</result_rows>
-                {% endif %}
-                {% if interval.read_rows is defined %}
+{% endif %}
+{% if interval.read_rows is defined %}
                 <read_rows>{{ interval.read_rows }}</read_rows>
-                {% endif %}
-                {% if interval.execution_time is defined %}
+{% endif %}
+{% if interval.execution_time is defined %}
                 <execution_time>{{ interval.execution_time }}</execution_time>
-                {% endif %}
+{% endif %}
             </interval>
-            {% endfor %}
+{% endfor %}
         </{{ quota_name }}>
-        {% endfor %}
+{% endfor %}
     </quotas>
 </yandex>
